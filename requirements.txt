@@ -1,9 +1,9 @@
 matplotlib
 seaborn
-pandas==1.5.3
+pandas
 numpy
 klib
-ydata-profiling==4.9.0
+ydata-profiling
 streamlit
 streamlit-option-menu
 visions>=0.7.5,<0.7.7
