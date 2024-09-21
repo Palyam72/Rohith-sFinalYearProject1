@@ -9,8 +9,7 @@ import numpy as np
 import random
 from matplotlib import *
 from streamlit_option_menu import option_menu
-from pycaret.classification import *
-from pycaret.regression import *
+
 
 class Statistics:
     def __init__(self, dataset):
