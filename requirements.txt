@@ -6,5 +6,5 @@ klib
 ydata-profiling==4.9.0
 streamlit
 streamlit-option-menu
+visions>=0.7.5,<0.7.7
 streamlit-pandas-profiling
-visions==0.7.5
