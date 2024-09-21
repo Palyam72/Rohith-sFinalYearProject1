@@ -2,10 +2,9 @@ matplotlib
 numpy
 seaborn
 pandas
-ydata-profiling==4.7.0
-pandas-profiling==3.1.0
+ydata-profiling
+streamlit-pandas-profiling
 klib
 streamlit
-streamlit-pandas-profiling
 streamlit-option-menu
-visions==0.7.5
+visions
