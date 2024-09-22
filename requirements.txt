@@ -4,5 +4,5 @@ dataprep
 matplotlib
 seaborn
 streamlit-option-menu
-markupsafe
-jinja2
+numpy
+klib
