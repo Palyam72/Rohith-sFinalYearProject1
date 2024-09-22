@@ -4,5 +4,5 @@ dataprep
 matplotlib
 seaborn
 streamlit-option-menu
-markupsafe==2.0.1
-jinja2==3.0.3
+markupsafe
+jinja2
