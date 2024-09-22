@@ -1,8 +1,7 @@
-matplotlib
-numpy
-seaborn
-pandas
 streamlit
+pandas
+dataprep
+matplotlib
+seaborn
+numpy
 streamlit-option-menu
-streamlit-pandas-profiling
-ydata-profiling
