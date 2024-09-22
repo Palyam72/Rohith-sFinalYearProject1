@@ -2,7 +2,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
-from ydata_profiling import ProfileReport
 from streamlit_pandas_profiling import st_profile_report
 import numpy as np
 import random
@@ -170,14 +169,6 @@ class Statistics:
             plt.xticks(rotation=45, ha='right')
             plt.title("Kurtosis (by Columns)")
             st.pyplot(plt.gcf())
-
-        
-
-class Krishna:
-    def __init__(self,dataset):
-        self.dataset=dataset
-    def main(self):
-        krishna.missing_plot(dataset)
 
 
         
@@ -2275,7 +2266,7 @@ class Cat_Cat:
                    
 csv_file = st.sidebar.file_uploader("Upload Any CSV File", type=["csv"])
 with st.sidebar:
-        option_menus = option_menu("Analyser Menu", ["Pandas Basic Informative Dashboard", "y-data Profiling Dashboard", "Univariate Analysis",
+        option_menus = option_menu("Analyser Menu", ["Pandas Basic Informative Dashboard",  "Univariate Analysis",
                                                      "Implement Seaborn Graphs", "Implement Matplotlib Graphs","Hundred's of plots"])
 if csv_file:
         dataframe = pd.read_csv(csv_file)
@@ -2287,11 +2278,6 @@ if csv_file:
             pandas.secondary_information()
             pandas.statistics_1()
             pandas.statistics_2()
-
-        # Option for y-data profiling dashboard
-        elif option_menus == "y-data Profiling Dashboard":
-            profile1 = ProfileReport(dataframe, title="Pandas Profiling Report")
-            st_profile_report(profile1, key="report2")
 
         # Option for Univariate Analysis
         elif option_menus == "Univariate Analysis":
