@@ -1974,155 +1974,186 @@ class AllPlots:
         self.categorical_columns = self.dataset.select_dtypes(include=["category", "string", "object"])
 
     def relplot(self):
-        for i in range(len(self.numerical_columns.columns)):
-            for j in range(i + 1, len(self.numerical_columns.columns)):
-                x_col = self.numerical_columns.columns[i]
-                y_col = self.numerical_columns.columns[j]
-                
-                # Scatterplot
-                st.write(f"### Scatterplot: {x_col} vs {y_col}")
-                plt.figure(figsize=(10, 6))
-                sns.scatterplot(data=self.dataset, x=x_col, y=y_col)
-                plt.title(f"{x_col} vs {y_col}")
-                st.pyplot(plt)
-                
-                # Lineplot
-                st.write(f"### Lineplot: {x_col} vs {y_col}")
-                plt.figure(figsize=(10, 6))
-                sns.lineplot(data=self.dataset, x=x_col, y=y_col)
-                plt.title(f"{x_col} vs {y_col}")
-                st.pyplot(plt)
-                
-                # Relplot (which can do both scatter and line plots via kind parameter)
-                st.write(f"### Relplot: {x_col} vs {y_col}")
-                plt.figure(figsize=(10, 6))
-                sns.relplot(data=self.dataset, x=x_col, y=y_col, kind="scatter")
-                plt.title(f"{x_col} vs {y_col} - Scatter")
-                st.pyplot(plt)
-                
-                plt.figure(figsize=(10, 6))
-                sns.relplot(data=self.dataset, x=x_col, y=y_col, kind="line")
-                plt.title(f"{x_col} vs {y_col} - Line")
-                st.pyplot(plt)
+        try:
+            for i in range(len(self.numerical_columns.columns)):
+                for j in range(i + 1, len(self.numerical_columns.columns)):
+                    x_col = self.numerical_columns.columns[i]
+                    y_col = self.numerical_columns.columns[j]
+                    
+                    # Scatterplot
+                    st.write(f"### Scatterplot: {x_col} vs {y_col}")
+                    plt.figure(figsize=(10, 6))
+                    sns.scatterplot(data=self.dataset, x=x_col, y=y_col)
+                    plt.title(f"{x_col} vs {y_col}")
+                    st.pyplot(plt)
+                    
+                    # Lineplot
+                    st.write(f"### Lineplot: {x_col} vs {y_col}")
+                    plt.figure(figsize=(10, 6))
+                    sns.lineplot(data=self.dataset, x=x_col, y=y_col)
+                    plt.title(f"{x_col} vs {y_col}")
+                    st.pyplot(plt)
+                    
+                    # Relplot (which can do both scatter and line plots via kind parameter)
+                    st.write(f"### Relplot: {x_col} vs {y_col}")
+                    plt.figure(figsize=(10, 6))
+                    sns.relplot(data=self.dataset, x=x_col, y=y_col, kind="scatter")
+                    plt.title(f"{x_col} vs {y_col} - Scatter")
+                    st.pyplot(plt)
+                    
+                    plt.figure(figsize=(10, 6))
+                    sns.relplot(data=self.dataset, x=x_col, y=y_col, kind="line")
+                    plt.title(f"{x_col} vs {y_col} - Line")
+                    st.pyplot(plt)
+                except:
+                    st.info("Some Error Occured IN Generating The relational plots")
     def distributions(self):
         for i in range(len(self.numerical_columns.columns)):
             for j in range(i + 1, len(self.numerical_columns.columns)):
                 x_col = self.numerical_columns.columns[i]
                 y_col = self.numerical_columns.columns[j]
                 
-                # Histplot (Bivariate)
-                st.write(f"### Histplot: {x_col} vs {y_col}")
-                plt.figure(figsize=(10, 6))
-                sns.histplot(data=self.dataset, x=x_col, y=y_col)
-                plt.title(f"Histogram: {x_col} vs {y_col}")
-                st.pyplot(plt)
-                
-                # KDEplot (Bivariate)
-                st.write(f"### KDEplot: {x_col} vs {y_col}")
-                plt.figure(figsize=(10, 6))
-                sns.kdeplot(data=self.dataset, x=x_col, y=y_col)
-                plt.title(f"KDE: {x_col} vs {y_col}")
-                st.pyplot(plt)
-                
-                # ECDFplot (Univariate)
-                st.write(f"### ECDFplot: {x_col}")
-                plt.figure(figsize=(10, 6))
-                sns.ecdfplot(data=self.dataset, x=x_col)
-                plt.title(f"ECDF: {x_col}")
-                st.pyplot(plt)
-
-                st.write(f"### ECDFplot: {y_col}")
-                plt.figure(figsize=(10, 6))
-                sns.ecdfplot(data=self.dataset, x=y_col)
-                plt.title(f"ECDF: {y_col}")
-                st.pyplot(plt)
-                
-                # Rugplot
-                st.write(f"### Rugplot: {x_col} vs {y_col}")
-                plt.figure(figsize=(10, 6))
-                sns.rugplot(data=self.dataset, x=x_col, y=y_col)
-                plt.title(f"Rugplot: {x_col} vs {y_col}")
-                st.pyplot(plt)
+                try:
+                    st.write(f"### Histplot: {x_col} vs {y_col}")
+                    plt.figure(figsize=(10, 6))
+                    sns.histplot(data=self.dataset, x=x_col, y=y_col)
+                    plt.title(f"Histogram: {x_col} vs {y_col}")
+                    st.pyplot(plt)
+                except:
+                    st.info()
+                    
+                try:
+                    st.write(f"### KDEplot: {x_col} vs {y_col}")
+                    plt.figure(figsize=(10, 6))
+                    sns.kdeplot(data=self.dataset, x=x_col, y=y_col)
+                    plt.title(f"KDE: {x_col} vs {y_col}")
+                    st.pyplot(plt)
+                except:
+                    st.info()
+                    
+                try: 
+                    st.write(f"### ECDFplot: {x_col}")
+                    plt.figure(figsize=(10, 6))
+                    sns.ecdfplot(data=self.dataset, x=x_col)
+                    plt.title(f"ECDF: {x_col}")
+                    st.pyplot(plt)
+                except:
+                    st.info()
+    
+                try:
+                    st.write(f"### ECDFplot: {y_col}")
+                    plt.figure(figsize=(10, 6))
+                    sns.ecdfplot(data=self.dataset, x=y_col)
+                    plt.title(f"ECDF: {y_col}")
+                    st.pyplot(plt)
+                except:
+                    st.info()
+                    
+                try:
+                    st.write(f"### Rugplot: {x_col} vs {y_col}")
+                    plt.figure(figsize=(10, 6))
+                    sns.rugplot(data=self.dataset, x=x_col, y=y_col)
+                    plt.title(f"Rugplot: {x_col} vs {y_col}")
+                    st.pyplot(plt)
+                except:
+                    st.info()
     def regression_plots(self):
         for i in range(len(self.numerical_columns.columns)):
             for j in range(i + 1, len(self.numerical_columns.columns)):
                 x_col = self.numerical_columns.columns[i]
                 y_col = self.numerical_columns.columns[j]
             
-                # lmplot
-                st.write(f"### lmplot: {x_col} vs {y_col}")
-                sns.lmplot(data=self.dataset, x=x_col, y=y_col, height=6, aspect=1.5)
-                plt.title(f"Linear Regression Model: {x_col} vs {y_col}")
-                st.pyplot(plt)
-
-                # regplot
-                st.write(f"### regplot: {x_col} vs {y_col}")
-                plt.figure(figsize=(10, 6))
-                sns.regplot(data=self.dataset, x=x_col, y=y_col)
-                plt.title(f"Regression Plot: {x_col} vs {y_col}")
-                st.pyplot(plt)
-
-                # residplot
-                st.write(f"### residplot: Residuals of {x_col} vs {y_col}")
-                plt.figure(figsize=(10, 6))
-                sns.residplot(data=self.dataset, x=x_col, y=y_col)
-                plt.title(f"Residual Plot: {x_col} vs {y_col}")
-                st.pyplot(plt)
+                try:
+                    st.write(f"### lmplot: {x_col} vs {y_col}")
+                    sns.lmplot(data=self.dataset, x=x_col, y=y_col, height=6, aspect=1.5)
+                    plt.title(f"Linear Regression Model: {x_col} vs {y_col}")
+                    st.pyplot(plt)
+                except:
+                    st.info(st.info("SONME ERROR OCCURED DURING LMPLOT))
+    
+                try:
+                    st.write(f"### regplot: {x_col} vs {y_col}")
+                    plt.figure(figsize=(10, 6))
+                    sns.regplot(data=self.dataset, x=x_col, y=y_col)
+                    plt.title(f"Regression Plot: {x_col} vs {y_col}")
+                    st.pyplot(plt)
+                except:
+                    st.info(st.info("SONME ERROR OCCURED DURING REGPLOT)
+    
+                try:
+                    st.write(f"### residplot: Residuals of {x_col} vs {y_col}")
+                    plt.figure(figsize=(10, 6))
+                    sns.residplot(data=self.dataset, x=x_col, y=y_col)
+                    plt.title(f"Residual Plot: {x_col} vs {y_col}")
+                    st.pyplot(plt)
+                except:
+                    st.info(st.info("SONME ERROR OCCURED DURING RESID PLOT"))
     def matrix_plots(self):
         for i in range(len(self.numerical_columns.columns)):
             for j in range(i + 1, len(self.numerical_columns.columns)):
                 x_col = self.numerical_columns.columns[i]
                 y_col = self.numerical_columns.columns[j]
-
-            # Compute the correlation matrix for the selected pair of columns
                 corr_matrix = self.dataset[[x_col, y_col]].corr()
-
-            # Heatmap
-                st.write(f"### Heatmap: {x_col} vs {y_col}")
-                plt.figure(figsize=(8, 6))
-                sns.heatmap(corr_matrix, annot=True, cmap="coolwarm", fmt=".2f")
-                plt.title(f"Heatmap of Correlation: {x_col} vs {y_col}")
-                st.pyplot(plt)
-
-            # Clustermap
-                st.write(f"### Clustermap: {x_col} vs {y_col}")
-                sns.clustermap(corr_matrix, annot=True, cmap="coolwarm", fmt=".2f", figsize=(8, 6))
-                plt.title(f"Clustermap of Correlation: {x_col} vs {y_col}")
-                st.pyplot(plt)
+    
+                try:
+                    st.write(f"### Heatmap: {x_col} vs {y_col}")
+                    plt.figure(figsize=(8, 6))
+                    sns.heatmap(corr_matrix, annot=True, cmap="coolwarm", fmt=".2f")
+                    plt.title(f"Heatmap of Correlation: {x_col} vs {y_col}")
+                    st.pyplot(plt)
+                except:
+                    st.info(st.info("SONME ERROR OCCURED DURING HEAT MAP"))
+    
+                try:
+                    st.write(f"### Clustermap: {x_col} vs {y_col}")
+                    sns.clustermap(corr_matrix, annot=True, cmap="coolwarm", fmt=".2f", figsize=(8, 6))
+                    plt.title(f"Clustermap of Correlation: {x_col} vs {y_col}")
+                    st.pyplot(plt)
+                except:
+                    st.info(st.info("SONME ERROR OCCURED DURING CLUSTER MAP"))
+                    
     def multi_plot_grids(self):
-    # Pairplot
-        st.write("### Pairplot: Pairwise Relationships Between Numerical Variables")
-        sns.pairplot(self.dataset[self.numerical_columns.columns])
-        st.pyplot(plt)
+        try:
+            st.write("### Pairplot: Pairwise Relationships Between Numerical Variables")
+            sns.pairplot(self.dataset[self.numerical_columns.columns])
+            st.pyplot(plt)
+        except:
+            st.info("SONME ERROR OCCURED DURING PAIR PLOT")
+    
+        try:
+            st.write("### PairGrid: Customized Pairwise Plots")
+            pair_grid = sns.PairGrid(self.dataset[self.numerical_columns.columns])
+            pair_grid.map_diag(sns.histplot)
+            pair_grid.map_offdiag(sns.scatterplot)
+            st.pyplot(pair_grid.fig)
+        except:
+            st.info("SONME ERROR OCCURED DURING PAIR GRID")
 
-    # PairGrid
-        st.write("### PairGrid: Customized Pairwise Plots")
-        pair_grid = sns.PairGrid(self.dataset[self.numerical_columns.columns])
-        pair_grid.map_diag(sns.histplot)
-        pair_grid.map_offdiag(sns.scatterplot)
-        st.pyplot(pair_grid.fig)
-
-    # Jointplot
         for i in range(len(self.numerical_columns.columns)):
             for j in range(i + 1, len(self.numerical_columns.columns)):
                 x_col = self.numerical_columns.columns[i]
                 y_col = self.numerical_columns.columns[j]
+                try:
+                    st.write(f"### Jointplot: {x_col} vs {y_col}")
+                    sns.jointplot(data=self.dataset, x=x_col, y=y_col, kind="scatter", marginal_kws=dict(bins=15, fill=True))
+                    plt.title(f"Jointplot: {x_col} vs {y_col}", loc='left')
+                    st.pyplot(plt)
+                except:
+                    st.info("SOME ERROR OCCURED DURING JOINT PLOT")
+                    
 
-                st.write(f"### Jointplot: {x_col} vs {y_col}")
-                sns.jointplot(data=self.dataset, x=x_col, y=y_col, kind="scatter", marginal_kws=dict(bins=15, fill=True))
-                plt.title(f"Jointplot: {x_col} vs {y_col}", loc='left')
-                st.pyplot(plt)
 
-    # JointGrid
         for i in range(len(self.numerical_columns.columns)):
             for j in range(i + 1, len(self.numerical_columns.columns)):
                 x_col = self.numerical_columns.columns[i]
                 y_col = self.numerical_columns.columns[j]
-
-                st.write(f"### JointGrid: Customized Jointplot for {x_col} vs {y_col}")
-                joint_grid = sns.JointGrid(data=self.dataset, x=x_col, y=y_col)
-                joint_grid.plot(sns.scatterplot, sns.histplot)
-                st.pyplot(joint_grid.fig)
+                try:
+                    st.write(f"### JointGrid: Customized Jointplot for {x_col} vs {y_col}")
+                    joint_grid = sns.JointGrid(data=self.dataset, x=x_col, y=y_col)
+                    joint_grid.plot(sns.scatterplot, sns.histplot)
+                    st.pyplot(joint_grid.fig)
+                except:
+                    st.info("SOME ERROR OCCURED DURING GENERATING THE JOINT GRID")
         st.divider()
 
 
