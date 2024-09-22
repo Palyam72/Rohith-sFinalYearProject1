@@ -5,7 +5,7 @@ import streamlit as st
 import random
 from matplotlib import *
 from streamlit_option_menu import option_menu
-from ydata_profiling import ProfileReport
+from dataprep.eda import create_report
 from streamlit_pandas_profiling import st_profile_report
 
 
@@ -2358,8 +2358,10 @@ if csv_file:
         elif option_menus=="Implement Matplotlib Graphs":
             Matplotlib(dataframe).plot()
         elif option_menus == "y-data Profiling Dashboard":
-            profile1 = ProfileReport(dataframe, title="Pandas Profiling Report")
-            st_profile_report(profile1, key="report2")
+            st.header("Dataprep Profiling Dashboard")
+            report = create_report(dataframe)
+            st.components.v1.html(report.show_browser(), height=1000, scrolling=True)
+            
         elif option_menus == "Hundred's of plots":
             all_plots_instance = AllPlots(dataframe)
             all_plots_instance.relplot()
