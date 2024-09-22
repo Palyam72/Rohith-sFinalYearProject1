@@ -3,7 +3,6 @@ numpy
 seaborn
 pandas
 pandas-profiling
-klib
 streamlit
 streamlit-pandas-profiling
 streamlit-option-menu
