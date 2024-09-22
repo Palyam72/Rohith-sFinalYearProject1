@@ -2062,14 +2062,6 @@ class AllPlots:
             for j in range(i + 1, len(self.numerical_columns.columns)):
                 x_col = self.numerical_columns.columns[i]
                 y_col = self.numerical_columns.columns[j]
-            
-                try:
-                    st.write(f"### lmplot: {x_col} vs {y_col}")
-                    sns.lmplot(data=self.dataset, x=x_col, y=y_col)
-                    plt.title(f"Linear Regression Model: {x_col} vs {y_col}")
-                    st.pyplot(plt)
-                except:
-                    st.info(st.info("SONME ERROR OCCURED DURING LMPLOT")
     
                 try:
                     st.write(f"### regplot: {x_col} vs {y_col}")
