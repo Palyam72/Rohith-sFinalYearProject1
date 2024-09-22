@@ -5,7 +5,6 @@ import streamlit as st
 import random
 from matplotlib import *
 from streamlit_option_menu import option_menu
-from streamlit_pandas_profiling import st_profile_report
 
 
 class Statistics:
