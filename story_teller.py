@@ -5,9 +5,7 @@ import streamlit as st
 import random
 from matplotlib import *
 from streamlit_option_menu import option_menu
-from dataprep.eda import create_report
 from streamlit_pandas_profiling import st_profile_report
-import streamlit.components.v1 as components
 
 
 class Statistics:
@@ -2267,7 +2265,7 @@ class Cat_Cat:
                    
 csv_file = st.sidebar.file_uploader("Upload Any CSV File", type=["csv"])
 with st.sidebar:
-        option_menus = option_menu("Analyser Menu", ["Pandas Basic Informative Dashboard",  "Univariate Analysis", "y-data Profiling Dashboard",
+        option_menus = option_menu("Analyser Menu", ["Pandas Basic Informative Dashboard",  "Univariate Analysis",
                                                      "Implement Seaborn Graphs", "Implement Matplotlib Graphs","Hundred's of plots"])
 if csv_file:
         dataframe = pd.read_csv(csv_file)
@@ -2358,10 +2356,7 @@ if csv_file:
                     Pairplot(value).plot()
         elif option_menus=="Implement Matplotlib Graphs":
             Matplotlib(dataframe).plot()
-        elif option_menus == "y-data Profiling Dashboard":
-            st.header("Dataprep Profiling Dashboard")
-            report = create_report(dataframe)
-            st.components.v1.html(report.show_browser(), height=1000, scrolling=True)
+    
             
         elif option_menus == "Hundred's of plots":
             all_plots_instance = AllPlots(dataframe)
