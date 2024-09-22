@@ -2271,7 +2271,7 @@ if csv_file:
 
         # Option for Pandas Basic Informative Dashboard
         if option_menus == "Pandas Basic Informative Dashboard":
-            pandas = Statistics(value)
+            pandas = Statistics(dataframe)
             pandas.basic_details()
             pandas.secondary_information()
             pandas.statistics_1()
