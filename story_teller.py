@@ -2,7 +2,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
-import numpy as np
 import random
 from matplotlib import *
 from streamlit_option_menu import option_menu
