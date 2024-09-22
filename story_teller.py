@@ -5,6 +5,8 @@ import streamlit as st
 import random
 from matplotlib import *
 from streamlit_option_menu import option_menu
+from ydata_profiling import ProfileReport
+from streamlit_pandas_profiling import st_profile_report
 
 
 class Statistics:
@@ -2264,7 +2266,7 @@ class Cat_Cat:
                    
 csv_file = st.sidebar.file_uploader("Upload Any CSV File", type=["csv"])
 with st.sidebar:
-        option_menus = option_menu("Analyser Menu", ["Pandas Basic Informative Dashboard",  "Univariate Analysis",
+        option_menus = option_menu("Analyser Menu", ["Pandas Basic Informative Dashboard",  "Univariate Analysis", "y-data Profiling Dashboard",
                                                      "Implement Seaborn Graphs", "Implement Matplotlib Graphs","Hundred's of plots"])
 if csv_file:
         dataframe = pd.read_csv(csv_file)
@@ -2355,6 +2357,9 @@ if csv_file:
                     Pairplot(value).plot()
         elif option_menus=="Implement Matplotlib Graphs":
             Matplotlib(dataframe).plot()
+        elif option_menus == "y-data Profiling Dashboard":
+            profile1 = ProfileReport(dataframe, title="Pandas Profiling Report")
+            st_profile_report(profile1, key="report2")
         elif option_menus == "Hundred's of plots":
             all_plots_instance = AllPlots(dataframe)
             all_plots_instance.relplot()
