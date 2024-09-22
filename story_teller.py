@@ -2065,7 +2065,7 @@ class AllPlots:
             
                 try:
                     st.write(f"### lmplot: {x_col} vs {y_col}")
-                    sns.lmplot(data=self.dataset, x=x_col, y=y_col, height=6, aspect=1.5)
+                    sns.lmplot(data=self.dataset, x=x_col, y=y_col)
                     plt.title(f"Linear Regression Model: {x_col} vs {y_col}")
                     st.pyplot(plt)
                 except:
