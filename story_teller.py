@@ -7,6 +7,7 @@ from matplotlib import *
 from streamlit_option_menu import option_menu
 from dataprep.eda import create_report
 from streamlit_pandas_profiling import st_profile_report
+import streamlit.components.v1 as components
 
 
 class Statistics:
