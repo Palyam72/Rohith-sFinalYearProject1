@@ -2,7 +2,7 @@ matplotlib
 numpy
 seaborn
 pandas
-ydata-profiling
+pandas-profiling
 klib
 streamlit
 streamlit-pandas-profiling
