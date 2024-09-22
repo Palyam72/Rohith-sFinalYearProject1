@@ -2,6 +2,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
+import klib as krishna
+import numpy as np
 import random
 from matplotlib import *
 from streamlit_option_menu import option_menu
@@ -41,13 +43,13 @@ class Statistics:
         st.dataframe(memory_usage_df)
 
         # Display numerical data types if they exist
-        numerical_data = self.dataset.select_dtypes(include=['number'])
+        numerical_data = self.dataset.select_dtypes(include=['number','int32','int64','float32','float64'])
         if not numerical_data.empty:
             st.subheader("Numerical Data Columns:")
             st.dataframe(numerical_data)
 
         # Display categorical and time series data if they exist
-        categorical_data = self.dataset.select_dtypes(include=['category', 'object'])
+        categorical_data = self.dataset.select_dtypes(include=['category', 'object','string'])
         time_series_data = self.dataset.select_dtypes(include=['datetime'])
 
         if not categorical_data.empty:
@@ -167,6 +169,14 @@ class Statistics:
             plt.xticks(rotation=45, ha='right')
             plt.title("Kurtosis (by Columns)")
             st.pyplot(plt.gcf())
+
+        
+
+class Krishna:
+    def __init__(self,dataset):
+        self.dataset=dataset
+    def main(self):
+        krishna.missing_plot(dataset)
 
 
         
@@ -2264,14 +2274,17 @@ class Cat_Cat:
                    
 csv_file = st.sidebar.file_uploader("Upload Any CSV File", type=["csv"])
 with st.sidebar:
-        option_menus = option_menu("Analyser Menu", ["Pandas Basic Informative Dashboard",  "Univariate Analysis",
+        option_menus = option_menu("Analyser Menu", ["Pandas Basic Informative Dashboard", "Univariate Analysis",
                                                      "Implement Seaborn Graphs", "Implement Matplotlib Graphs","Hundred's of plots"])
 if csv_file:
         dataframe = pd.read_csv(csv_file)
+        
+        # Assuming `krishna` is an instance of a class that contains the method `data_cleaning`.
+        value = krishna.data_cleaning(dataframe)
 
         # Option for Pandas Basic Informative Dashboard
         if option_menus == "Pandas Basic Informative Dashboard":
-            pandas = Statistics(dataframe)
+            pandas = Statistics(value)
             pandas.basic_details()
             pandas.secondary_information()
             pandas.statistics_1()
@@ -2280,12 +2293,12 @@ if csv_file:
         # Option for Univariate Analysis
         elif option_menus == "Univariate Analysis":
             with st.expander("Univariate Analysis - Basic"):
-                univariateAnalysis = UnivariateWithoutHue(dataframe)
+                univariateAnalysis = UnivariateWithoutHue(value)
                 cc, nc = univariateAnalysis.extract_columns()
                 univariateAnalysis.layout(nc)
 
             with st.expander("Univariate Analysis - Intermediate"):
-                uWh = UnivariateAnalysisWithHue(dataframe)
+                uWh = UnivariateAnalysisWithHue(value)
                 uWh.layout()
 
         # Option for Implementing Seaborn Graphs
@@ -2314,59 +2327,56 @@ if csv_file:
 
                 # Plotting based on user selection
                 if displot:
-                    Displot(dataframe).plot()
+                    Displot(value).plot()
                 if histplot:
-                    Histplot(dataframe).plot()  # Corrected to match the class name casing
+                    Histplot(value).plot()  # Corrected to match the class name casing
                 if kdePlot:
-                    Kdeplot(dataframe).plot()
+                    Kdeplot(value).plot()
                 if ecdf:
-                    Ecdfplot(dataframe).plot()
+                    Ecdfplot(value).plot()
                 if rugplot:
-                    Rugplot(dataframe).plot()
+                    Rugplot(value).plot()
                 if catplot:
-                    Catplot(dataframe).plot()
+                    Catplot(value).plot()
                 if stripplot:
-                    Stripplot(dataframe).plot()
+                    Stripplot(value).plot()
                 if swarmplot:
-                    Swarmplot(dataframe).plot()
+                    Swarmplot(value).plot()
                 if boxplot:
-                    Boxplot(dataframe).plot()
+                    Boxplot(value).plot()
                 if violinplot:
-                    Violinplot(dataframe).plot()
+                    Violinplot(value).plot()
                 if boxenplot:
-                    Boxenplot(dataframe).plot()
+                    Boxenplot(value).plot()
                 if pointplot:
-                    Pointplot(dataframe).plot()
+                    Pointplot(value).plot()
                 if barplot:
-                    Barplot(dataframe).plot()
+                    Barplot(value).plot()
                 if countplot:
-                    Countplot(dataframe).plot()
+                    Countplot(value).plot()
                 if lmplot:
-                    Lmplot(dataframe).plot()
+                    Lmplot(value).plot()
                 if regplot:
-                    Regplot(dataframe).plot()
+                    Regplot(value).plot()
                 if residplot:
-                    Residplot(dataframe).plot()
+                    Residplot(value).plot()
                 if heatmap:
-                    Heatmap(dataframe).plot()
+                    Heatmap(value).plot()
                 if jointplot:
-                    Jointplot(dataframe).plot()
+                    Jointplot(value).plot()
                 if pairplot:
                     Pairplot(value).plot()
         elif option_menus=="Implement Matplotlib Graphs":
-            Matplotlib(dataframe).plot()
-    
-            
+            Matplotlib(value).plot()
+        elif option_menus=="AutoML":
+            PyCaretML(dataframe).regressor()
         elif option_menus == "Hundred's of plots":
-            all_plots_instance = AllPlots(dataframe)
+            all_plots_instance = AllPlots(value)
             all_plots_instance.relplot()
             all_plots_instance.distributions()
             all_plots_instance.regression_plots()
             all_plots_instance.matrix_plots()
             all_plots_instance.multi_plot_grids()
-            cat_plots_instance = Cat_allPlots_num(dataframe)
+            cat_plots_instance = Cat_allPlots_num(value)
             cat_plots_instance.main()
             Cat_Cat(value).main()
-            
-            
-            
