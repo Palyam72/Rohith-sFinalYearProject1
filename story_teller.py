@@ -2020,7 +2020,7 @@ class AllPlots:
                     plt.title(f"Histogram: {x_col} vs {y_col}")
                     st.pyplot(plt)
                 except:
-                    st.info()
+                    st.info("SOME ERROR OCCURED")
                     
                 try:
                     st.write(f"### KDEplot: {x_col} vs {y_col}")
@@ -2029,7 +2029,7 @@ class AllPlots:
                     plt.title(f"KDE: {x_col} vs {y_col}")
                     st.pyplot(plt)
                 except:
-                    st.info()
+                    st.info("SOME ERROR OCCURED")
                     
                 try: 
                     st.write(f"### ECDFplot: {x_col}")
@@ -2038,7 +2038,7 @@ class AllPlots:
                     plt.title(f"ECDF: {x_col}")
                     st.pyplot(plt)
                 except:
-                    st.info()
+                    st.info("SOME ERROR OCCURED")
     
                 try:
                     st.write(f"### ECDFplot: {y_col}")
@@ -2047,7 +2047,7 @@ class AllPlots:
                     plt.title(f"ECDF: {y_col}")
                     st.pyplot(plt)
                 except:
-                    st.info()
+                    st.info("SOME ERROR OCCURED")
                     
                 try:
                     st.write(f"### Rugplot: {x_col} vs {y_col}")
@@ -2056,7 +2056,7 @@ class AllPlots:
                     plt.title(f"Rugplot: {x_col} vs {y_col}")
                     st.pyplot(plt)
                 except:
-                    st.info()
+                    st.info("SOME ERROR OCCURED")
     def regression_plots(self):
         for i in range(len(self.numerical_columns.columns)):
             for j in range(i + 1, len(self.numerical_columns.columns)):
@@ -2069,7 +2069,7 @@ class AllPlots:
                     plt.title(f"Linear Regression Model: {x_col} vs {y_col}")
                     st.pyplot(plt)
                 except:
-                    st.info(st.info("SONME ERROR OCCURED DURING LMPLOT))
+                    st.info(st.info("SONME ERROR OCCURED DURING LMPLOT")
     
                 try:
                     st.write(f"### regplot: {x_col} vs {y_col}")
@@ -2078,7 +2078,7 @@ class AllPlots:
                     plt.title(f"Regression Plot: {x_col} vs {y_col}")
                     st.pyplot(plt)
                 except:
-                    st.info(st.info("SONME ERROR OCCURED DURING REGPLOT)
+                    st.info("SONME ERROR OCCURED DURING REGPLOT")
     
                 try:
                     st.write(f"### residplot: Residuals of {x_col} vs {y_col}")
@@ -2110,7 +2110,7 @@ class AllPlots:
                     plt.title(f"Clustermap of Correlation: {x_col} vs {y_col}")
                     st.pyplot(plt)
                 except:
-                    st.info(st.info("SONME ERROR OCCURED DURING CLUSTER MAP"))
+                    st.info("SONME ERROR OCCURED DURING CLUSTER MAP")
                     
     def multi_plot_grids(self):
         try:
