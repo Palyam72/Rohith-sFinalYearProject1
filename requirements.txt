@@ -1,6 +1,6 @@
 streamlit
 pandas
-dataprep==1.3.0
+dataprep
 matplotlib
 seaborn
 streamlit-option-menu
