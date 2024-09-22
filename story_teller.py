@@ -2,7 +2,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
-import klib as krishna
 from ydata_profiling import ProfileReport
 from streamlit_pandas_profiling import st_profile_report
 import numpy as np
@@ -2280,9 +2279,6 @@ with st.sidebar:
                                                      "Implement Seaborn Graphs", "Implement Matplotlib Graphs","Hundred's of plots"])
 if csv_file:
         dataframe = pd.read_csv(csv_file)
-        
-        # Assuming `krishna` is an instance of a class that contains the method `data_cleaning`.
-        value = krishna.data_cleaning(dataframe)
 
         # Option for Pandas Basic Informative Dashboard
         if option_menus == "Pandas Basic Informative Dashboard":
@@ -2294,18 +2290,18 @@ if csv_file:
 
         # Option for y-data profiling dashboard
         elif option_menus == "y-data Profiling Dashboard":
-            profile1 = ProfileReport(value, title="Pandas Profiling Report")
+            profile1 = ProfileReport(dataframe, title="Pandas Profiling Report")
             st_profile_report(profile1, key="report2")
 
         # Option for Univariate Analysis
         elif option_menus == "Univariate Analysis":
             with st.expander("Univariate Analysis - Basic"):
-                univariateAnalysis = UnivariateWithoutHue(value)
+                univariateAnalysis = UnivariateWithoutHue(dataframe)
                 cc, nc = univariateAnalysis.extract_columns()
                 univariateAnalysis.layout(nc)
 
             with st.expander("Univariate Analysis - Intermediate"):
-                uWh = UnivariateAnalysisWithHue(value)
+                uWh = UnivariateAnalysisWithHue(dataframe)
                 uWh.layout()
 
         # Option for Implementing Seaborn Graphs
@@ -2334,57 +2330,55 @@ if csv_file:
 
                 # Plotting based on user selection
                 if displot:
-                    Displot(value).plot()
+                    Displot(dataframe).plot()
                 if histplot:
-                    Histplot(value).plot()  # Corrected to match the class name casing
+                    Histplot(dataframe).plot()  # Corrected to match the class name casing
                 if kdePlot:
-                    Kdeplot(value).plot()
+                    Kdeplot(dataframe).plot()
                 if ecdf:
-                    Ecdfplot(value).plot()
+                    Ecdfplot(dataframe).plot()
                 if rugplot:
-                    Rugplot(value).plot()
+                    Rugplot(dataframe).plot()
                 if catplot:
-                    Catplot(value).plot()
+                    Catplot(dataframe).plot()
                 if stripplot:
-                    Stripplot(value).plot()
+                    Stripplot(dataframe).plot()
                 if swarmplot:
-                    Swarmplot(value).plot()
+                    Swarmplot(dataframe).plot()
                 if boxplot:
-                    Boxplot(value).plot()
+                    Boxplot(dataframe).plot()
                 if violinplot:
-                    Violinplot(value).plot()
+                    Violinplot(dataframe).plot()
                 if boxenplot:
-                    Boxenplot(value).plot()
+                    Boxenplot(dataframe).plot()
                 if pointplot:
-                    Pointplot(value).plot()
+                    Pointplot(dataframe).plot()
                 if barplot:
-                    Barplot(value).plot()
+                    Barplot(dataframe).plot()
                 if countplot:
-                    Countplot(value).plot()
+                    Countplot(dataframe).plot()
                 if lmplot:
-                    Lmplot(value).plot()
+                    Lmplot(dataframe).plot()
                 if regplot:
-                    Regplot(value).plot()
+                    Regplot(dataframe).plot()
                 if residplot:
-                    Residplot(value).plot()
+                    Residplot(dataframe).plot()
                 if heatmap:
-                    Heatmap(value).plot()
+                    Heatmap(dataframe).plot()
                 if jointplot:
-                    Jointplot(value).plot()
+                    Jointplot(dataframe).plot()
                 if pairplot:
                     Pairplot(value).plot()
         elif option_menus=="Implement Matplotlib Graphs":
-            Matplotlib(value).plot()
-        elif option_menus=="AutoML":
-            PyCaretML(dataframe).regressor()
+            Matplotlib(dataframe).plot()
         elif option_menus == "Hundred's of plots":
-            all_plots_instance = AllPlots(value)
+            all_plots_instance = AllPlots(dataframe)
             all_plots_instance.relplot()
             all_plots_instance.distributions()
             all_plots_instance.regression_plots()
             all_plots_instance.matrix_plots()
             all_plots_instance.multi_plot_grids()
-            cat_plots_instance = Cat_allPlots_num(value)
+            cat_plots_instance = Cat_allPlots_num(dataframe)
             cat_plots_instance.main()
             Cat_Cat(value).main()
             
