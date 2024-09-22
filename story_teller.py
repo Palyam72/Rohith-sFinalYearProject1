@@ -2,7 +2,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
-from streamlit_pandas_profiling import st_profile_report
 import numpy as np
 import random
 from matplotlib import *
