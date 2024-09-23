@@ -2055,7 +2055,7 @@ class AllPlots:
                     sns.lmplot(data=self.dataset, x=x_col, y=y_col, height=6, aspect=1.5)
                     plt.title(f"Linear Regression Model: {x_col} vs {y_col}")
                     st.pyplot(plt)
-                except e:
+                except:
                     st.info(e)
 
                 # regplot
