@@ -2374,25 +2374,25 @@ if csv_file:
             all_plots_instance = AllPlots(value)
             col1,col2=st.columns([1,2])
             with col1:
-                if st.checkbo("Apply ALL Rel Plots"):
+                if st.checkbox("Apply ALL Rel Plots"):
                     with col2:
                         all_plots_instance.relplot()
-                if st.checkbo("Apply ALL Distribution Plots"):
+                if st.checkbox("Apply ALL Distribution Plots"):
                     with col2:
                         all_plots_instance.distributions()
-                if st.checkbo("Apply ALL Regression Plots"):
+                if st.checkbox("Apply ALL Regression Plots"):
                     with col2:
                         all_plots_instance.regression_plots()
-                if st.checkbo("Apply ALL Matrix Plots"):
+                if st.checkbox("Apply ALL Matrix Plots"):
                     with col2:
                         all_plots_instance.matrix_plots()
-                if st.checkbo("Apply ALL Multi Plot grids"):
+                if st.checkbox("Apply ALL Multi Plot grids"):
                     with col2:
                         all_plots_instance.multi_plot_grids()
-                if st.checkbo("Apply ALL Categorical Plots"):
+                if st.checkbox("Apply ALL Categorical Plots"):
                     with col2:
                         cat_plots_instance = Cat_allPlots_num(value)
                         cat_plots_instance.main()
-                if st.checkbo("Apply ALL Categorical Plots VS CAtegorical Plots"):
+                if st.checkbox("Apply ALL Categorical Plots VS CAtegorical Plots"):
                     with col2:
                         Cat_Cat(value).main()
