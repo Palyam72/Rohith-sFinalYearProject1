@@ -2050,10 +2050,13 @@ class AllPlots:
                 y_col = self.numerical_columns.columns[j]
             
                 # lmplot
-                st.write(f"### lmplot: {x_col} vs {y_col}")
-                sns.lmplot(data=self.dataset, x=x_col, y=y_col, height=6, aspect=1.5)
-                plt.title(f"Linear Regression Model: {x_col} vs {y_col}")
-                st.pyplot(plt)
+                try:
+                    st.write(f"### lmplot: {x_col} vs {y_col}")
+                    sns.lmplot(data=self.dataset, x=x_col, y=y_col, height=6, aspect=1.5)
+                    plt.title(f"Linear Regression Model: {x_col} vs {y_col}")
+                    st.pyplot(plt)
+                except as e:
+                    st.info(e)
 
                 # regplot
                 st.write(f"### regplot: {x_col} vs {y_col}")
