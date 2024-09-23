@@ -2056,7 +2056,7 @@ class AllPlots:
                     plt.title(f"Linear Regression Model: {x_col} vs {y_col}")
                     st.pyplot(plt)
                 except:
-                    st.info(e)
+                    st.info(f"SOME ERROR GENERATED WHEN GENEARTING LMPLOT FOR {x_col} VS {y_col}")
 
                 # regplot
                 st.write(f"### regplot: {x_col} vs {y_col}")
