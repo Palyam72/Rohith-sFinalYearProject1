@@ -5,3 +5,4 @@ seaborn
 streamlit-option-menu
 numpy
 klib
+chardet
