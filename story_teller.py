@@ -2288,11 +2288,8 @@ class Cat_Cat:
 # Sidebar for file upload and menu
 csv_file = st.sidebar.file_uploader("Upload Any CSV File", type=["csv"])
 with st.sidebar:
-    option_menus = st.selectbox("Analyser Menu", ["Pandas Basic Informative Dashboard", 
-                                                  "Univariate Analysis", 
-                                                  "Implement Seaborn Graphs", 
-                                                  "Implement Matplotlib Graphs", 
-                                                  "Hundred's of plots"])
+    option_menus = option_menu("Analyser Menu", ["Pandas Basic Informative Dashboard", "y-data Profiling Dashboard", "Univariate Analysis",
+                                                     "Implement Seaborn Graphs", "Implement Matplotlib Graphs","Hundred's of plots"])
 
 # Check if a CSV file is uploaded
 if csv_file:
