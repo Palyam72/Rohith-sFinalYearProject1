@@ -2285,15 +2285,30 @@ class Cat_Cat:
 
 
                    
+# Sidebar for file upload and menu
 csv_file = st.sidebar.file_uploader("Upload Any CSV File", type=["csv"])
 with st.sidebar:
-        option_menus = option_menu("Analyser Menu", ["Pandas Basic Informative Dashboard","Univariate Analysis",
-                                                     "Implement Seaborn Graphs", "Implement Matplotlib Graphs","Hundred's of plots"])
-if csv_file: 
-        with open(csv_file, 'rb') as f:
-            result = chardet.detect(f.read(100000))  # Read first 100 KB to detect encoding
+    option_menus = st.selectbox("Analyser Menu", ["Pandas Basic Informative Dashboard", 
+                                                  "Univariate Analysis", 
+                                                  "Implement Seaborn Graphs", 
+                                                  "Implement Matplotlib Graphs", 
+                                                  "Hundred's of plots"])
+
+# Check if a CSV file is uploaded
+if csv_file:
+            # Reading the uploaded file as bytes (file-like object)
+            csv_bytes = csv_file.read(100000)  # Read the first 100KB to detect encoding
+            result = chardet.detect(csv_bytes)
             encoding = result['encoding']
-            dataframe = pd.read_csv(csv_file)
+        
+            # Move back to the start of the file after reading
+            csv_file.seek(0)
+        
+            # Read CSV using the detected encoding
+            dataframe = pd.read_csv(csv_file, encoding=encoding)
+        
+            # Display the dataframe in Streamlit
+            st.write(dataframe)
         
             # Assuming `krishna` is an instance of a class that contains the method `data_cleaning`.
             value = krishna.data_cleaning(dataframe)
