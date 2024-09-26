@@ -2293,134 +2293,131 @@ with st.sidebar:
 
 # Check if a CSV file is uploaded
 if csv_file:
-            # Reading the uploaded file as bytes (file-like object)
-            csv_bytes = csv_file.read(100000)  # Read the first 100KB to detect encoding
-            result = chardet.detect(csv_bytes)
-            encoding = result['encoding']
-        
-            # Move back to the start of the file after reading
-            csv_file.seek(0)
-        
-            # Read CSV using the detected encoding
-            dataframe = pd.read_csv(csv_file, encoding=encoding)
-        
-            # Display the dataframe in Streamlit
-            st.write(dataframe)
-        
-            # Assuming `krishna` is an instance of a class that contains the method `data_cleaning`.
-            value = krishna.data_cleaning(dataframe)
-    
-            # Option for Pandas Basic Informative Dashboard
-            if option_menus == "Pandas Basic Informative Dashboard":
-                pandas = Statistics(value)
-                pandas.basic_details()
-                pandas.secondary_information()
-                pandas.statistics_1()
-                pandas.statistics_2()
-    
-            # Option for Univariate Analysis
-            elif option_menus == "Univariate Analysis":
-                with st.expander("Univariate Analysis - Basic"):
-                    univariateAnalysis = UnivariateWithoutHue(value)
-                    cc, nc = univariateAnalysis.extract_columns()
-                    univariateAnalysis.layout(nc)
-    
-                with st.expander("Univariate Analysis - Intermediate"):
-                    uWh = UnivariateAnalysisWithHue(value)
-                    uWh.layout()
-    
-            # Option for Implementing Seaborn Graphs
-            elif option_menus == "Implement Seaborn Graphs":
-                with st.expander("Play with graphs and charts - 100% customizable"):
-                    displot = st.checkbox("Apply distribution plot")
-                    histplot = st.checkbox("Apply HistPlot")
-                    kdePlot = st.checkbox("Apply KDE Plot")
-                    ecdf = st.checkbox("Apply ECDF Plot")
-                    rugplot = st.checkbox("Apply RUG Plot")
-                    catplot = st.checkbox("Apply CAT Plot")
-                    stripplot = st.checkbox("Apply Stripplot")
-                    swarmplot = st.checkbox("Apply Swarm Plot")
-                    boxplot = st.checkbox("Apply Box Plot")
-                    violinplot = st.checkbox("Apply violin plot")
-                    boxenplot = st.checkbox("Apply Boxen plot")
-                    pointplot = st.checkbox("Apply Point Plot")
-                    barplot = st.checkbox("Apply Bar Plot")
-                    countplot = st.checkbox("Apply Count Plot")
-                    lmplot = st.checkbox("Apply Lmplot")
-                    regplot = st.checkbox("Apply Reg Plot")
-                    residplot = st.checkbox("Apply Resid Plot")
-                    heatmap = st.checkbox("Apply Heat Map")
-                    jointplot = st.checkbox("Apply Joint Plot")
-                    pairplot = st.checkbox("Apply Pair Plot")
-    
-                    # Plotting based on user selection
-                    if displot:
-                        Displot(value).plot()
-                    if histplot:
-                        Histplot(value).plot()  # Corrected to match the class name casing
-                    if kdePlot:
-                        Kdeplot(value).plot()
-                    if ecdf:
-                        Ecdfplot(value).plot()
-                    if rugplot:
-                        Rugplot(value).plot()
-                    if catplot:
-                        Catplot(value).plot()
-                    if stripplot:
-                        Stripplot(value).plot()
-                    if swarmplot:
-                        Swarmplot(value).plot()
-                    if boxplot:
-                        Boxplot(value).plot()
-                    if violinplot:
-                        Violinplot(value).plot()
-                    if boxenplot:
-                        Boxenplot(value).plot()
-                    if pointplot:
-                        Pointplot(value).plot()
-                    if barplot:
-                        Barplot(value).plot()
-                    if countplot:
-                        Countplot(value).plot()
-                    if lmplot:
-                        Lmplot(value).plot()
-                    if regplot:
-                        Regplot(value).plot()
-                    if residplot:
-                        Residplot(value).plot()
-                    if heatmap:
-                        Heatmap(value).plot()
-                    if jointplot:
-                        Jointplot(value).plot()
-                    if pairplot:
-                        Pairplot(value).plot()
-            elif option_menus=="Implement Matplotlib Graphs":
-                Matplotlib(value).plot()
-            elif option_menus=="AutoML":
-                PyCaretML(dataframe).regressor()
-            elif option_menus == "Hundred's of plots":
-                all_plots_instance = AllPlots(value)
-                col1,col2=st.columns([1,2])
-                with col1:
-                    if st.checkbox("Apply ALL Rel Plots"):
-                        with col2:
-                            all_plots_instance.relplot()
-                    if st.checkbox("Apply ALL Distribution Plots"):
-                        with col2:
-                            all_plots_instance.distributions()
-                    if st.checkbox("Apply ALL Regression Plots"):
-                        with col2:
-                            all_plots_instance.regression_plots()
-                    if st.checkbox("Apply ALL Matrix Plots"):
-                        with col2:
-                            all_plots_instance.matrix_plots()
-                    if st.checkbox("Apply ALL Multi Plot grids"):
-                        with col2:
-                            all_plots_instance.multi_plot_grids()
-                    if st.checkbox("Apply ALL Categorical Plots"):
-                        with col2:
-                            cat_plots_instance = Cat_allPlots_num(value)
-                            cat_plots_instance.main()
-                    if st.checkbox("Apply ALL Categorical Plots VS CAtegorical Plots"):
-                        with col2:
-                            Cat_Cat(value).main()
+    # Reading the uploaded file as bytes (file-like object)
+    csv_bytes = csv_file.read(100000)  # Read the first 100KB to detect encoding
+    result = chardet.detect(csv_bytes)
+    encoding = result['encoding']
+
+    # Move back to the start of the file after reading
+    csv_file.seek(0)
+
+    # Read CSV using the detected encoding
+    dataframe = pd.read_csv(csv_file, encoding=encoding)
+
+    # Assuming `krishna` is an instance of a class that contains the method `data_cleaning`.
+    value = krishna.data_cleaning(dataframe)
+
+    # Option for Pandas Basic Informative Dashboard
+    if option_menus == "Pandas Basic Informative Dashboard":
+        pandas = Statistics(value)
+        pandas.basic_details()
+        pandas.secondary_information()
+        pandas.statistics_1()
+        pandas.statistics_2()
+
+    # Option for Univariate Analysis
+    elif option_menus == "Univariate Analysis":
+        with st.expander("Univariate Analysis - Basic"):
+            univariateAnalysis = UnivariateWithoutHue(value)
+            cc, nc = univariateAnalysis.extract_columns()
+            univariateAnalysis.layout(nc)
+
+        with st.expander("Univariate Analysis - Intermediate"):
+            uWh = UnivariateAnalysisWithHue(value)
+            uWh.layout()
+
+    # Option for Implementing Seaborn Graphs
+    elif option_menus == "Implement Seaborn Graphs":
+        with st.expander("Play with graphs and charts - 100% customizable"):
+            displot = st.checkbox("Apply distribution plot")
+            histplot = st.checkbox("Apply HistPlot")
+            kdePlot = st.checkbox("Apply KDE Plot")
+            ecdf = st.checkbox("Apply ECDF Plot")
+            rugplot = st.checkbox("Apply RUG Plot")
+            catplot = st.checkbox("Apply CAT Plot")
+            stripplot = st.checkbox("Apply Stripplot")
+            swarmplot = st.checkbox("Apply Swarm Plot")
+            boxplot = st.checkbox("Apply Box Plot")
+            violinplot = st.checkbox("Apply violin plot")
+            boxenplot = st.checkbox("Apply Boxen plot")
+            pointplot = st.checkbox("Apply Point Plot")
+            barplot = st.checkbox("Apply Bar Plot")
+            countplot = st.checkbox("Apply Count Plot")
+            lmplot = st.checkbox("Apply Lmplot")
+            regplot = st.checkbox("Apply Reg Plot")
+            residplot = st.checkbox("Apply Resid Plot")
+            heatmap = st.checkbox("Apply Heat Map")
+            jointplot = st.checkbox("Apply Joint Plot")
+            pairplot = st.checkbox("Apply Pair Plot")
+
+            # Plotting based on user selection
+            if displot:
+                Displot(value).plot()
+            if histplot:
+                Histplot(value).plot()  # Corrected to match the class name casing
+            if kdePlot:
+                Kdeplot(value).plot()
+            if ecdf:
+                Ecdfplot(value).plot()
+            if rugplot:
+                Rugplot(value).plot()
+            if catplot:
+                Catplot(value).plot()
+            if stripplot:
+                Stripplot(value).plot()
+            if swarmplot:
+                Swarmplot(value).plot()
+            if boxplot:
+                Boxplot(value).plot()
+            if violinplot:
+                Violinplot(value).plot()
+            if boxenplot:
+                Boxenplot(value).plot()
+            if pointplot:
+                Pointplot(value).plot()
+            if barplot:
+                Barplot(value).plot()
+            if countplot:
+                Countplot(value).plot()
+            if lmplot:
+                Lmplot(value).plot()
+            if regplot:
+                Regplot(value).plot()
+            if residplot:
+                Residplot(value).plot()
+            if heatmap:
+                Heatmap(value).plot()
+            if jointplot:
+                Jointplot(value).plot()
+            if pairplot:
+                Pairplot(value).plot()
+    elif option_menus=="Implement Matplotlib Graphs":
+        Matplotlib(value).plot()
+    elif option_menus=="AutoML":
+        PyCaretML(dataframe).regressor()
+    elif option_menus == "Hundred's of plots":
+        all_plots_instance = AllPlots(value)
+        col1,col2=st.columns([1,2])
+        with col1:
+            if st.checkbox("Apply ALL Rel Plots"):
+                with col2:
+                    all_plots_instance.relplot()
+            if st.checkbox("Apply ALL Distribution Plots"):
+                with col2:
+                    all_plots_instance.distributions()
+            if st.checkbox("Apply ALL Regression Plots"):
+                with col2:
+                    all_plots_instance.regression_plots()
+            if st.checkbox("Apply ALL Matrix Plots"):
+                with col2:
+                    all_plots_instance.matrix_plots()
+            if st.checkbox("Apply ALL Multi Plot grids"):
+                with col2:
+                    all_plots_instance.multi_plot_grids()
+            if st.checkbox("Apply ALL Categorical Plots"):
+                with col2:
+                    cat_plots_instance = Cat_allPlots_num(value)
+                    cat_plots_instance.main()
+            if st.checkbox("Apply ALL Categorical Plots VS CAtegorical Plots"):
+                with col2:
+                    Cat_Cat(value).main()
