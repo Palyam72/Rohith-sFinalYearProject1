@@ -2004,6 +2004,7 @@ class AllPlots:
                 sns.relplot(data=self.dataset, x=x_col, y=y_col, kind="line")
                 plt.title(f"{x_col} vs {y_col} - Line")
                 st.pyplot(plt)
+    
     def distributions(self):
         for i in range(len(self.numerical_columns.columns)):
             for j in range(i + 1, len(self.numerical_columns.columns)):
@@ -2043,6 +2044,7 @@ class AllPlots:
                 sns.rugplot(data=self.dataset, x=x_col, y=y_col)
                 plt.title(f"Rugplot: {x_col} vs {y_col}")
                 st.pyplot(plt)
+
     def regression_plots(self):
         for i in range(len(self.numerical_columns.columns)):
             for j in range(i + 1, len(self.numerical_columns.columns)):
@@ -2059,18 +2061,25 @@ class AllPlots:
                     st.info(f"SOME ERROR GENERATED WHEN GENEARTING LMPLOT FOR {x_col} VS {y_col}")
 
                 # regplot
-                st.write(f"### regplot: {x_col} vs {y_col}")
-                plt.figure(figsize=(10, 6))
-                sns.regplot(data=self.dataset, x=x_col, y=y_col)
-                plt.title(f"Regression Plot: {x_col} vs {y_col}")
-                st.pyplot(plt)
-
+                try:
+                    st.write(f"### regplot: {x_col} vs {y_col}")
+                    plt.figure(figsize=(10, 6))
+                    sns.regplot(data=self.dataset, x=x_col, y=y_col)
+                    plt.title(f"Regression Plot: {x_col} vs {y_col}")
+                    st.pyplot(plt)
+                except:
+                    st.info(f"SOME ERROR GENERATED WHEN GENEARTING REGPLOT FOR {x_col} VS {y_col}")
+                
                 # residplot
-                st.write(f"### residplot: Residuals of {x_col} vs {y_col}")
-                plt.figure(figsize=(10, 6))
-                sns.residplot(data=self.dataset, x=x_col, y=y_col)
-                plt.title(f"Residual Plot: {x_col} vs {y_col}")
-                st.pyplot(plt)
+                try:
+                    st.write(f"### residplot: Residuals of {x_col} vs {y_col}")
+                    plt.figure(figsize=(10, 6))
+                    sns.residplot(data=self.dataset, x=x_col, y=y_col)
+                    plt.title(f"Residual Plot: {x_col} vs {y_col}")
+                    st.pyplot(plt)
+                except:
+                    st.info(f"SOME ERROR GENERATED WHEN GENEARTING RESIDPLOT FOR {x_col} VS {y_col}")
+                    
     def matrix_plots(self):
         for i in range(len(self.numerical_columns.columns)):
             for j in range(i + 1, len(self.numerical_columns.columns)):
@@ -2081,11 +2090,14 @@ class AllPlots:
                 corr_matrix = self.dataset[[x_col, y_col]].corr()
 
             # Heatmap
-                st.write(f"### Heatmap: {x_col} vs {y_col}")
-                plt.figure(figsize=(8, 6))
-                sns.heatmap(corr_matrix, annot=True, cmap="coolwarm", fmt=".2f")
-                plt.title(f"Heatmap of Correlation: {x_col} vs {y_col}")
-                st.pyplot(plt)
+                try:
+                    st.write(f"### Heatmap: {x_col} vs {y_col}")
+                    plt.figure(figsize=(8, 6))
+                    sns.heatmap(corr_matrix, annot=True, cmap="coolwarm", fmt=".2f")
+                    plt.title(f"Heatmap of Correlation: {x_col} vs {y_col}")
+                    st.pyplot(plt)
+                except:
+                    st.info()
 
             # Clustermap
                 st.write(f"### Clustermap: {x_col} vs {y_col}")
@@ -2146,45 +2158,40 @@ class Cat_allPlots_num:
         if self.removed_columns:
             st.write(f"Dear user, we removed the following categorical columns from plotting due to their high cardinality: {self.removed_columns}")
 
-    def relplot(self, hue_col):
-        # Remove high cardinality columns before plotting
-        self.remove_high_cardinality_columns()
-
-        # Check if any categorical columns are left
-        if len(self.categorical_columns.columns) == 0:
-            st.write("Sorry, no categorical columns are left after removal of high cardinality columns. Hence, no plots can be generated.")
-            return
-
-        # Plotting scatter and line plots
+    def relplot(self, hue):
         for i in range(len(self.numerical_columns.columns)):
             for j in range(i + 1, len(self.numerical_columns.columns)):
                 x_col = self.numerical_columns.columns[i]
                 y_col = self.numerical_columns.columns[j]
 
-                # Relplot (Scatter)
-                st.write(f"### Relplot: {x_col} vs {y_col} - Scatter with Hue {hue_col}")
-                sns.relplot(data=self.dataset, x=x_col, y=y_col, hue=hue_col, kind="scatter")
-                st.pyplot(plt)
-                plt.clf()  # Clear the plot for the next iteration
+                # Scatterplot with Hue
+                try:
+                    st.write(f"### Scatterplot: {x_col} vs {y_col} (Categorical Hue: {hue})")
+                    plt.figure(figsize=(10, 6))
+                    sns.scatterplot(data=self.dataset, x=x_col, y=y_col, hue=hue)
+                    plt.title(f"Scatterplot: {x_col} vs {y_col} with {hue} Hue")
+                    st.pyplot(plt)
+                except:
+                    st.info(f"An error occurred when generating scatterplot for {x_col} vs {y_col} with {hue} Hue.")
 
-                # Relplot (Line)
-                st.write(f"### Relplot: {x_col} vs {y_col} - Line with Hue {hue_col}")
-                sns.relplot(data=self.dataset, x=x_col, y=y_col, hue=hue_col, kind="line")
-                st.pyplot(plt)
-                plt.clf()  # Clear the plot for the next iteration
+                # Lineplot with Hue
+                try:
+                    st.write(f"### Lineplot: {x_col} vs {y_col} (Categorical Hue: {hue})")
+                    plt.figure(figsize=(10, 6))
+                    sns.lineplot(data=self.dataset, x=x_col, y=y_col, hue=hue)
+                    plt.title(f"Lineplot: {x_col} vs {y_col} with {hue} Hue")
+                    st.pyplot(plt)
+                except:
+                    st.info(f"An error occurred when generating lineplot for {x_col} vs {y_col} with {hue} Hue.")
 
     def main(self):
-        # Ensure high cardinality columns are removed before main execution
         self.remove_high_cardinality_columns()
 
-        if len(self.categorical_columns.columns) == 0:
-            st.write("No categorical columns available for plotting.")
-            return
-
-        # Generate plots for non-removed columns
-        for col in range(len(self.categorical_columns.columns)):
-            for hue in range(col + 1, len(self.categorical_columns.columns)):
-                self.relplot(self.categorical_columns.columns[hue])
+        # Loop through each pair of categorical columns and call self.relplot() for each pair
+        for col in self.categorical_columns.columns:
+            for hue in self.categorical_columns.columns:
+                if col != hue:
+                    self.relplot(hue)
 
 class Cat_Cat:
     def __init__(self, dataset):
